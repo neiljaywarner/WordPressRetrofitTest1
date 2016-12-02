@@ -46,17 +46,12 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<ArticleResponse> call, Response<ArticleResponse> response) {
                 Log.e("NJW", "response");
                 ArticleResponse articleResponse = response.body();
-                String imageUrl = articleResponse.channel.items.get(0).contentList.get(2).url;
+                String imageUrl = articleResponse.channel.items.get(0).contentList.get(0).url;
+                imageUrl = imageUrl.replace("http://", "https://");
+                imageUrl = imageUrl +"&w=120&h=120";
                 Log.d("NJW", "ImageUrl=" + imageUrl);
                 String title = articleResponse.channel.items.get(0).title;
-               /*
-                mTextView.setText(articleResponse.channel.title
-                        +"\nTitle0=  " + articleResponse.channel.items.get(0).title
-                        +"\nImage0=  " + articleResponse.channel.items.get(0).contentList.get(0).url
-                        +"\nDesc0=  " + articleResponse.channel.items.get(0).description
 
-                );
-                */
                 mTextView.setText(title);
 
                 String data = articleResponse.channel.items.get(0).encoded;
