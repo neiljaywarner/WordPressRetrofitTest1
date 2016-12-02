@@ -11,6 +11,15 @@
     android:orientation="vertical"
     tools:context="com.christianbloggersapp.myapplication.MainActivity">
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+    <ImageView
+        android:id="@+id/imageView"
+
+        android:layout_width="120dp"
+        android:layout_height="120dp" />
     <TextView
 
         android:id="@+id/textView"
@@ -18,10 +27,13 @@
         android:layout_height="wrap_content"
         android:text="Hello World!" />
 
+    </LinearLayout>
+<!--
     <WebView
         android:id="@+id/webViewDescription"
         android:layout_width="match_parent"
         android:layout_height="50dp"/>
+        -->
 
     <WebView
         android:id="@+id/webViewContent"

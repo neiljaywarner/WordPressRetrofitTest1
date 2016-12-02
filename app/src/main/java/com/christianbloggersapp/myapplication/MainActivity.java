@@ -4,7 +4,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -16,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView mTextView;
     WebView mWebViewContent, mWebViewDescription;
+    ImageView mImageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
         mTextView = (TextView) findViewById(R.id.textView);
         mTextView.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_bright));
         mWebViewContent = (WebView) findViewById(R.id.webViewContent);
-        mWebViewDescription = (WebView) findViewById(R.id.webViewDescription);
-
+        //mWebViewDescription = (WebView) findViewById(R.id.webViewDescription);
+        mImageView = (ImageView) findViewById(R.id.imageView);
 
 
         // https://jeaniesjourneys.com/feed/?paged=2
@@ -42,18 +46,25 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<ArticleResponse> call, Response<ArticleResponse> response) {
                 Log.e("NJW", "response");
                 ArticleResponse articleResponse = response.body();
+                String imageUrl = articleResponse.channel.items.get(0).contentList.get(2).url;
+                Log.d("NJW", "ImageUrl=" + imageUrl);
+                String title = articleResponse.channel.items.get(0).title;
+               /*
                 mTextView.setText(articleResponse.channel.title
                         +"\nTitle0=  " + articleResponse.channel.items.get(0).title
                         +"\nImage0=  " + articleResponse.channel.items.get(0).contentList.get(0).url
                         +"\nDesc0=  " + articleResponse.channel.items.get(0).description
 
                 );
-
-                String description = articleResponse.channel.items.get(0).description;
-                mWebViewDescription.loadData(description, "text/html; charset=utf-8", "UTF-8");
+                */
+                mTextView.setText(title);
 
                 String data = articleResponse.channel.items.get(0).encoded;
                 mWebViewContent.loadData(data, "text/html; charset=utf-8", "UTF-8");
+
+
+                Picasso.with(mImageView.getContext()).load(imageUrl).into(mImageView);
+
             }
 
             @Override
