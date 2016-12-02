@@ -1,7 +1,10 @@
 package com.christianbloggersapp.myapplication;
 
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
+
+import java.util.List;
 
 /**
  * Created by neil on 12/1/16.
@@ -15,12 +18,18 @@ public class Item {
     @Element(name = "link")
     public String link;
 
+    @ElementList(inline = true)
+    public List<Content> contentList;
+
 
     @Element(name = "creator", data=true)
     public String creator;
 
     @Element(name = "description", data=true)
     public String description;
+
+    @Element(name = "encoded", data=true) //content:encoded with cdata
+    public String encoded;
 
 
 
